@@ -1,24 +1,34 @@
 package com.example.leonardo.clase5;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        MainFragment.OnFragmentInteractionListener,
+        ProfileFragment.OnFragmentPerfilListener,
         CustomViewFragment.OnFragmentInteractionListener {
+
+    private TextView tvNameMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +36,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,12 +45,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        tvNameMenu=(TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_menuName);
 
-             MainFragment mainFragment=MainFragment.newInstance("par1","par2");
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container,mainFragment )
-                    .commit();
+
+        MyPreferences pref = new MyPreferences(MainActivity.this);
+
+        ProfileFragment profileFragment = ProfileFragment.newInstance(pref.getUserName(),"par2");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, profileFragment)
+                .commit();
 
 
     }
@@ -65,11 +77,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            MainFragment mainFragment=MainFragment.newInstance("par1","par2");
+        if (id == R.id.profile) {
+            ProfileFragment profileFragment = ProfileFragment.newInstance("par1","par2");
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.container,mainFragment )
+                    .replace(R.id.container, profileFragment)
                     .commit();
         } else if (id == R.id.nav_gallery) {
            CustomViewFragment customViewFragment=new CustomViewFragment();
@@ -77,14 +89,6 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container,customViewFragment )
                     .commit();
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -96,4 +100,13 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    @Override
+    public void onGetPerfilSuccsses(String result) {
+        Gson gson=new Gson();
+        Person person=gson.fromJson(result,Person.class);
+        tvNameMenu.setText(person.getFirstname());
+    }
+
+
 }
