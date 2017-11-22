@@ -1,6 +1,5 @@
 package com.example.leonardo.clase5;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -10,23 +9,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.leonardo.clase5.Entidades.Person;
+import com.example.leonardo.clase5.Utils.MyPreferences;
 import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        ProfileFragment.OnFragmentPerfilListener,
-        CustomViewFragment.OnFragmentInteractionListener {
+        FragmentProfile.OnFragmentPerfilListener,
+        FragmentCustomView.OnFragmentInteractionListener {
 
     private TextView tvNameMenu;
 
@@ -50,10 +43,10 @@ public class MainActivity extends AppCompatActivity
 
         MyPreferences pref = new MyPreferences(MainActivity.this);
 
-        ProfileFragment profileFragment = ProfileFragment.newInstance(pref.getUserName(),"par2");
+        FragmentProfile fragmentProfile = FragmentProfile.newInstance(pref.getUserName(),"par2");
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, profileFragment)
+                .replace(R.id.container, fragmentProfile)
                 .commit();
 
 
@@ -78,16 +71,29 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.profile) {
-            ProfileFragment profileFragment = ProfileFragment.newInstance("par1","par2");
+            FragmentProfile fragmentProfile = FragmentProfile.newInstance("par1","par2");
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, profileFragment)
+                    .replace(R.id.container, fragmentProfile)
                     .commit();
-        } else if (id == R.id.nav_gallery) {
-           CustomViewFragment customViewFragment=new CustomViewFragment();
+        } else if (id == R.id.calls) {
+           FragmentCalls fragmentCalls =new FragmentCalls();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.container,customViewFragment )
+                    .replace(R.id.container, fragmentCalls)
+                    .commit();
+        }else if (id == R.id.sqlite) {
+            FragmentSql fragmentSql =new FragmentSql();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragmentSql)
+                    .commit();
+        }
+        else if (id == R.id.provider) {
+            FragmentGetProvider fragmentGetProvider =new FragmentGetProvider();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragmentGetProvider)
                     .commit();
         }
 

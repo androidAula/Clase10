@@ -2,7 +2,6 @@ package com.example.leonardo.clase5;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.leonardo.clase5.Utils.ConnectionDetector;
+import com.example.leonardo.clase5.Utils.JsonParser;
 import com.google.android.gms.plus.PlusOneButton;
-import com.google.gson.Gson;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -26,7 +25,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 
-public class ProfileFragment extends Fragment {
+public class FragmentProfile extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,13 +41,13 @@ public class ProfileFragment extends Fragment {
 
     private OnFragmentPerfilListener mListener;
 
-    public ProfileFragment() {
+    public FragmentProfile() {
 
     }
 
 
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
+    public static FragmentProfile newInstance(String param1, String param2) {
+        FragmentProfile fragment = new FragmentProfile();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

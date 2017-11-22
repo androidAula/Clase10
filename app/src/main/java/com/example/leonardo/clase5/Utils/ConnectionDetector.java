@@ -9,7 +9,7 @@
  * The is the source code for Lab 8 of the text book.
  *
  */
-package com.example.leonardo.clase5;
+package com.example.leonardo.clase5.Utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -18,7 +18,7 @@ import android.net.NetworkInfo;
 public class ConnectionDetector {
 
     private Context context;
-    ConnectionDetector(Context context){
+    public ConnectionDetector(Context context){
         this.context=context;
     }
     public boolean isConnectingToInternet() {

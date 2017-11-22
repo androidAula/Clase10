@@ -9,7 +9,7 @@
  * The is the source code for Lab 8 of the text book.
  *
  */
-package com.example.leonardo.clase5;
+package com.example.leonardo.clase5.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

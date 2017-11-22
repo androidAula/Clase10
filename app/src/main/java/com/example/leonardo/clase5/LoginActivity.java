@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.leonardo.clase5.Utils.MyPreferences;
+
 /**
  * Created by Leonardo on 20/11/2017.
  */

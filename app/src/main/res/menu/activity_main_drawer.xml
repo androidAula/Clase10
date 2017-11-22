@@ -7,9 +7,17 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Profile" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/calls"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Llamadas" />
+        <item
+            android:id="@+id/sqlite"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="sqlite" />
+        <item
+            android:id="@+id/provider"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="provider" />
 
     </group>
 

@@ -1,4 +1,4 @@
-package com.example.leonardo.clase5;
+package com.example.leonardo.clase5.Entidades;
 
 import java.io.Serializable;
 

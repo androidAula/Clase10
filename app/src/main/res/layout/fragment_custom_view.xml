@@ -6,7 +6,7 @@
     <view
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        class="com.example.leonardo.clase5.AndroidATCView"
+        class="com.example.leonardo.clase5.Utils.AndroidATCView"
         android:id="@+id/androidATCView1"
         android:layout_gravity="center" />
 
