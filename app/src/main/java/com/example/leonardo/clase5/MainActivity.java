@@ -1,7 +1,12 @@
 package com.example.leonardo.clase5;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.leonardo.clase5.Entidades.Person;
+import com.example.leonardo.clase5.Utils.MusicService;
 import com.example.leonardo.clase5.Utils.MyPreferences;
 import com.google.gson.Gson;
 
@@ -22,6 +28,7 @@ public class MainActivity extends AppCompatActivity
         FragmentCustomView.OnFragmentInteractionListener {
 
     private TextView tvNameMenu;
+    private static final int myNotification=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +56,30 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.container, fragmentProfile)
                 .commit();
 
+        NotificationManager notificationManager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+
+        Notification.Builder builder2 = new Notification.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setWhen(System.currentTimeMillis())
+                .setContentText("Android Notifications")
+                .setPriority(Notification.PRIORITY_MIN);;
+        builder2.setContentTitle("Minimum priority notification");
+
+        notificationManager.notify(1,builder2.build());
+
+        Notification.Builder builder3 = new Notification.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setWhen(System.currentTimeMillis())
+                .setContentText("Android Notifications")
+                .setPriority(Notification.PRIORITY_LOW);;
+        builder3.setContentTitle("Low priority notification");
+
+        notificationManager.notify(2,builder3.build());
+
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -95,6 +124,8 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, fragmentGetProvider)
                     .commit();
+            Intent intent=new Intent(this, MusicService.class);
+            stopService(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

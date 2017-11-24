@@ -31,6 +31,7 @@
         </activity>
         <provider android:name=".Utils.ClientesProvider"
             android:authorities="com.example.leonardo.clase5.contentproviders"/>
+        <service android:name=".Utils.MusicService"></service>
     </application>
 
 </manifest>
